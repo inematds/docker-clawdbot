@@ -22,17 +22,52 @@ Docker setup for [Clawdbot](https://docs.clawd.bot) — AI personal assistant wi
 
 ## Quick Start
 
+### Prerequisites
+
+| Platform | Requirement | Install |
+|----------|------------|---------|
+| **Windows** | Docker Desktop | [docker.com/products/docker-desktop](https://www.docker.com/products/docker-desktop/) |
+| **Windows** | Git | [git-scm.com](https://git-scm.com/download/win) |
+| **Mac** | Docker Desktop | [docker.com/products/docker-desktop](https://www.docker.com/products/docker-desktop/) |
+| **Linux** | Docker Engine + Compose | `curl -fsSL https://get.docker.com \| sh` |
+
+> ⚠️ **Windows users:** Make sure **Docker Desktop is running** before proceeding. Check the system tray for the Docker icon. If WSL shows `docker-desktop Stopped`, open Docker Desktop and wait for it to start.
+
 ### 1. Clone the repo
+
+**Linux / Mac:**
 ```bash
 git clone https://github.com/inematds/docker-clawdbot.git
 cd docker-clawdbot
 ```
 
+**Windows (CMD or PowerShell):**
+```cmd
+git clone https://github.com/inematds/docker-clawdbot.git
+cd docker-clawdbot
+```
+
 ### 2. Configure environment
+
+**Linux / Mac:**
 ```bash
 cp .env.example .env
 nano .env  # Fill in your API keys
 ```
+
+**Windows (CMD):**
+```cmd
+copy .env.example .env
+notepad .env
+```
+
+**Windows (PowerShell):**
+```powershell
+Copy-Item .env.example .env
+notepad .env
+```
+
+> ⚠️ **Important:** You MUST create the `.env` file before running `docker compose up`. The build will fail without it.
 
 **Required:**
 - `GATEWAY_AUTH_TOKEN` — generate with `openssl rand -hex 24`
@@ -55,6 +90,10 @@ nano .env  # Fill in your API keys
 ```bash
 docker compose up -d
 ```
+
+> 💡 **First run** takes a few minutes to build the image (downloads Node.js, FFmpeg, etc). Subsequent runs are instant.
+
+> ⚠️ **Windows error "pipe/dockerDesktopLinuxEngine"?** Docker Desktop is not running. Open it from the Start menu and wait until it shows "Docker is running", then retry.
 
 ### 4. Check status
 ```bash
@@ -248,6 +287,34 @@ Recommended model strategy:
 - Docker Engine 24+
 - Docker Compose v2+
 - At least 2GB RAM (4GB recommended with Whisper)
+
+## Troubleshooting
+
+### Windows
+
+| Error | Cause | Fix |
+|-------|-------|-----|
+| `open //./pipe/dockerDesktopLinuxEngine: O sistema não pode encontrar o arquivo` | Docker Desktop not running | Open Docker Desktop and wait for it to start |
+| `.env not found` | Missing config file | Run `copy .env.example .env` and edit with `notepad .env` |
+| `the attribute version is obsolete` | Old docker-compose format | Ignore (harmless) or update to latest docker-clawdbot |
+| `WSL docker-desktop Stopped` | WSL not started | Open Docker Desktop — it starts WSL automatically |
+| Build hangs or fails | Not enough RAM | Ensure at least 4GB allocated to Docker (Settings → Resources) |
+
+### Linux / Mac
+
+| Error | Cause | Fix |
+|-------|-------|-----|
+| `permission denied` | Not in docker group | Run `sudo usermod -aG docker $USER` then log out/in |
+| `port already in use` | Another service on 18789 | Change port in `docker-compose.yml` or stop the other service |
+| `no space left on device` | Disk full | Run `docker system prune -a` to clean old images |
+
+### General
+
+| Error | Fix |
+|-------|-----|
+| Bot not responding | Check logs: `docker compose logs -f` |
+| API errors | Verify API keys in `.env` are correct |
+| Can't access Webchat | Use SSH tunnel: `ssh -L 18789:localhost:18789 user@server` |
 
 ## Contributing
 

@@ -47,10 +47,166 @@ You have physical access to the machine. It sits behind your router/firewall.
 🔹 Use Tailscale for remote access instead of exposing SSH
 ```
 
-### What you DON'T need:
-- UFW (your router is the firewall)
+### What you can skip:
 - Fail2Ban (no public SSH)
-- SSH key-only auth (optional, nice to have)
+- Change SSH port (not exposed)
+
+---
+
+## 🏠🔒 Local Server — Maximum Security
+
+Same physical access, but you want **enterprise-grade** protection. For sensitive data, compliance, or paranoia (the good kind).
+
+### Threat model:
+- Compromised device on your LAN
+- Malware/ransomware spreading laterally
+- Insider threats (shared office/lab)
+- Physical theft of the machine
+- Supply chain attacks (compromised dependencies)
+
+### 🛡️ Full hardening:
+
+#### 1. Network Isolation
+```bash
+# Firewall even on LAN
+sudo apt-get install -y ufw
+sudo ufw default deny incoming
+sudo ufw default allow outgoing
+sudo ufw allow from 192.168.1.0/24 to any port 22  # SSH only from your LAN
+sudo ufw deny 18789/tcp
+sudo ufw --force enable
+
+# Dedicated VLAN for the server (configure on your router)
+# Isolates Clawdbot from IoT, guests, etc.
+```
+
+#### 2. SSH Hardening
+```bash
+# Key-only auth
+ssh-keygen -t ed25519 -C "local-admin"
+ssh-copy-id user@server-local-ip
+
+# Disable password + root login
+sudo sed -i "s/#PasswordAuthentication yes/PasswordAuthentication no/" /etc/ssh/sshd_config
+sudo sed -i "s/PasswordAuthentication yes/PasswordAuthentication no/" /etc/ssh/sshd_config
+sudo sed -i "s/PermitRootLogin yes/PermitRootLogin no/" /etc/ssh/sshd_config
+sudo systemctl restart sshd
+```
+
+#### 3. Full Disk Encryption (LUKS)
+Protects against physical theft:
+```bash
+# Best done during OS install
+# If already installed, encrypt data partition:
+sudo cryptsetup luksFormat /dev/sdX
+sudo cryptsetup luksOpen /dev/sdX clawdbot-data
+sudo mkfs.ext4 /dev/mapper/clawdbot-data
+```
+
+#### 4. Docker with AppArmor/SELinux
+```yaml
+# docker-compose.yml additions:
+services:
+  clawdbot:
+    security_opt:
+      - no-new-privileges:true
+      - apparmor:docker-default
+    cap_drop:
+      - ALL
+    cap_add:
+      - NET_BIND_SERVICE
+    read_only: true
+    tmpfs:
+      - /tmp:size=512M,noexec,nosuid
+```
+
+#### 5. Automatic Security Updates
+```bash
+sudo apt-get install -y unattended-upgrades
+sudo dpkg-reconfigure -plow unattended-upgrades
+```
+
+#### 6. Audit & Monitoring
+```bash
+# Install auditd for system-level auditing
+sudo apt-get install -y auditd
+sudo systemctl enable auditd
+
+# Monitor file changes on sensitive paths
+sudo auditctl -w /home/clawdbot/.clawdbot/ -p rwa -k clawdbot-config
+sudo auditctl -w /root/.ssh/ -p rwa -k ssh-keys
+
+# Log rotation (keep 90 days)
+cat > /etc/logrotate.d/clawdbot << 'LOGROTATE'
+/tmp/clawdbot/*.log {
+    daily
+    rotate 90
+    compress
+    delaycompress
+    missingok
+    notifempty
+}
+LOGROTATE
+```
+
+#### 7. Network Monitoring
+```bash
+# Install and enable intrusion detection
+sudo apt-get install -y tripwire aide
+
+# Monitor outbound connections
+sudo apt-get install -y nethogs
+# Run: sudo nethogs — shows which processes use bandwidth
+```
+
+#### 8. Backup Encryption
+```bash
+# Encrypted backup of Clawdbot data
+tar czf - /home/clawdbot/.clawdbot /home/clawdbot/workspace | \
+  gpg --symmetric --cipher-algo AES256 -o /backup/clawdbot-$(date +%Y%m%d).tar.gz.gpg
+```
+
+#### 9. USB/Physical Port Lockdown
+```bash
+# Disable USB storage (prevent data exfiltration via USB)
+echo "blacklist usb-storage" | sudo tee /etc/modprobe.d/disable-usb-storage.conf
+sudo update-initramfs -u
+
+# BIOS/UEFI password (set manually)
+# Disable boot from USB/CD in BIOS
+```
+
+#### 10. Tailscale for Remote Access
+```bash
+# Zero-trust network — no open ports needed
+curl -fsSL https://tailscale.com/install.sh | sh
+sudo tailscale up
+
+# Access only via Tailscale IP
+# Block ALL incoming on public interface:
+sudo ufw default deny incoming
+sudo ufw allow in on tailscale0
+```
+
+### Security Level Comparison
+
+| Measure | Basic | Maximum |
+|---------|-------|---------|
+| Gateway loopback | ✅ | ✅ |
+| DM pairing | ✅ | ✅ |
+| Logging | ✅ | ✅ |
+| chmod 600 | ✅ | ✅ |
+| UFW firewall | ❌ | ✅ |
+| SSH key-only | ❌ | ✅ |
+| Disk encryption | ❌ | ✅ |
+| AppArmor/SELinux | ❌ | ✅ |
+| Auditd | ❌ | ✅ |
+| Network monitoring | ❌ | ✅ |
+| USB lockdown | ❌ | ✅ |
+| Encrypted backups | ❌ | ✅ |
+| VLAN isolation | ❌ | ✅ |
+| Tailscale zero-trust | ❌ | ✅ |
+| Auto-updates | ❌ | ✅ |
 
 ---
 

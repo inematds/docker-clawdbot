@@ -1,0 +1,32 @@
+version: "3.8"
+
+services:
+  clawdbot:
+    build: .
+    container_name: clawdbot
+    restart: unless-stopped
+    env_file:
+      - .env
+    ports:
+      - "127.0.0.1:18789:18789"  # Loopback only — never expose to 0.0.0.0
+    volumes:
+      - clawdbot-data:/home/clawdbot/.clawdbot
+      - clawdbot-workspace:/home/clawdbot/workspace
+      - clawdbot-logs:/tmp/clawdbot
+    networks:
+      - clawdbot-net
+    security_opt:
+      - no-new-privileges:true
+    read_only: false
+    tmpfs:
+      - /tmp:size=512M
+
+networks:
+  clawdbot-net:
+    driver: bridge
+    internal: false  # Set to true for full network isolation (no internet)
+
+volumes:
+  clawdbot-data:
+  clawdbot-workspace:
+  clawdbot-logs:

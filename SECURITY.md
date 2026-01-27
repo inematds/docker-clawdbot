@@ -40,6 +40,41 @@ All secrets are passed via environment variables. **Never** put API keys or toke
 
 See `.env.example` for all available variables.
 
+## Host-Level Hardening (VPS/Server)
+
+These steps secure the host machine itself, independent of Docker:
+
+### 1. Firewall (UFW)
+```bash
+sudo apt-get install -y ufw
+sudo ufw allow OpenSSH
+sudo ufw deny 18789/tcp    # Block gateway port externally
+sudo ufw --force enable
+```
+
+### 2. SSH Key-Only Authentication
+⚠️ **Before disabling password auth**, make sure you have SSH keys configured and tested!
+
+```bash
+# Step 1: Add your public key to the server
+echo "your-public-key" >> ~/.ssh/authorized_keys
+chmod 600 ~/.ssh/authorized_keys
+
+# Step 2: Test SSH key login (from another terminal!)
+
+# Step 3: Only then disable password auth
+sudo sed -i "s/#PasswordAuthentication yes/PasswordAuthentication no/" /etc/ssh/sshd_config
+sudo sed -i "s/PasswordAuthentication yes/PasswordAuthentication no/" /etc/ssh/sshd_config
+sudo systemctl restart sshd
+```
+
+### 3. Fail2Ban (optional, recommended)
+```bash
+sudo apt-get install -y fail2ban
+sudo systemctl enable fail2ban
+```
+Protects against brute-force SSH attacks.
+
 ## Quick Security Audit
 
 Run inside the container:

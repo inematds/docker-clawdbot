@@ -111,6 +111,39 @@ networks:
 
 ⚠️ This blocks API calls to Anthropic/OpenAI. Only use if you have a local model setup.
 
+## Access Channels
+
+Multiple ways to interact with your Clawdbot from anywhere:
+
+| Channel | Type | Access | Setup |
+|---------|------|--------|-------|
+| 📱 **Telegram** | Messaging | Anywhere (mobile/desktop) | Create bot via [@BotFather](https://t.me/BotFather) |
+| 📲 **WhatsApp** | Messaging | Anywhere (mobile/desktop) | Link via QR code (`clawdbot channels login`) |
+| 💬 **Webchat** | Web UI | Local network / VPN | Built-in, runs on gateway port |
+| 🌐 **Webchat (public)** | Web UI | Anywhere | Nginx reverse proxy + SSL certificate |
+| 🔒 **Tailscale** | VPN | Anywhere (zero-trust) | Install Tailscale on server + devices |
+| 💜 **Discord** | Messaging | Anywhere | Create bot via Discord Developer Portal |
+| 💼 **Slack** | Messaging | Anywhere | Create Slack app + bot token |
+| 🔵 **Signal** | Messaging | Anywhere | Signal CLI or linked device |
+| 🟢 **Matrix** | Messaging | Anywhere | Matrix homeserver + bot account |
+
+### Which should I use?
+
+**Simplest setup:** Telegram — one bot token and you're done.
+
+**Most private:** Signal or Tailscale + Webchat.
+
+**Access from anywhere without extra apps:** Telegram + WhatsApp (you already have them on your phone).
+
+**Best for teams/work:** Slack or Discord.
+
+**Most secure remote access to Webchat:** Tailscale — zero-trust VPN, no open ports, works from any network.
+
+### Multi-channel
+You can enable **multiple channels simultaneously**. All channels share the same agent, memory, and workspace. Messages from any channel arrive in the same assistant.
+
+⚠️ **Cross-channel messaging is restricted** by design — the bot won't leak data between channels.
+
 ## Requirements
 
 - Docker Engine 24+

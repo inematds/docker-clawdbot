@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="assets/migration-banner.jpg" alt="ClawdBot → MoltBot Migration" width="100%">
+</p>
+
 > # ⚠️🚨 THIS PROJECT HAS MOVED 🚨⚠️
 > 
 > ## Clawdbot has been renamed to **Moltbot**

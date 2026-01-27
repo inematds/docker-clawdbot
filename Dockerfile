@@ -44,4 +44,4 @@ WORKDIR /home/clawdbot/workspace
 EXPOSE 18789
 
 ENTRYPOINT ["/home/clawdbot/entrypoint.sh"]
-CMD ["clawdbot", "gateway", "start", "--foreground"]
+CMD ["clawdbot", "gateway", "run"]

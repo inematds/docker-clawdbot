@@ -10,7 +10,7 @@ services:
     volumes:
       - clawdbot-data:/home/clawdbot/.clawdbot
       - clawdbot-workspace:/home/clawdbot/workspace
-      - clawdbot-logs:/tmp/clawdbot
+      - clawdbot-logs:/home/clawdbot/logs
     networks:
       - clawdbot-net
     security_opt:

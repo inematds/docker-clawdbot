@@ -1,0 +1,11 @@
+# Force LF line endings for all text files (prevents Windows CRLF issues)
+* text=auto eol=lf
+
+# Explicitly mark shell scripts
+*.sh text eol=lf
+
+# Binary files
+*.jpg binary
+*.png binary
+*.gif binary
+*.ico binary

@@ -349,7 +349,8 @@ stat -c '%a' ~/.clawdbot/clawdbot.json
 
 # Check gateway binding
 grep -o '"bind":"[^"]*"' ~/.clawdbot/clawdbot.json
-# Should be: "bind":"loopback"
+# Should be: "bind":"lan" (required inside Docker for port mapping)
+# The docker-compose.yml restricts external access to 127.0.0.1
 
 # Check DM policy
 grep -o '"dmPolicy":"[^"]*"' ~/.clawdbot/clawdbot.json

@@ -19,6 +19,7 @@ Docker setup for [Clawdbot](https://docs.clawd.bot) — AI personal assistant wi
 - 📝 **Logging enabled** — audit trail by default
 - 📱 **Telegram ready** — just add your bot token
 - 🎙️ **Audio transcription** — Faster Whisper included (optional)
+- 🪟 **Windows compatible** — `.gitattributes` enforces LF endings, Dockerfile fixes CRLF
 
 ## Quick Start
 
@@ -176,7 +177,7 @@ This setup implements 7 out of 10 security hardening measures automatically. See
 |--------|---------|
 | `clawdbot-data` | Config and session data |
 | `clawdbot-workspace` | Agent workspace (AGENTS.md, memory, etc) |
-| `clawdbot-logs` | Log files |
+| `clawdbot-logs` | Log files (`/home/clawdbot/logs`) |
 
 ## Useful Commands
 
@@ -357,7 +358,7 @@ Recommended model strategy:
 
 | Error | Cause | Fix |
 |-------|-------|-----|
-| `exec entrypoint.sh: no such file or directory` | Windows CRLF line endings | Open `entrypoint.sh` in VS Code, change CRLF → LF (bottom-right corner), save. Rebuild with `docker compose up -d --build` |
+| `exec entrypoint.sh: no such file or directory` | Windows CRLF line endings | This is auto-fixed by `.gitattributes` and the Dockerfile. If it still happens: `git config core.autocrlf input` then re-clone. Or open `entrypoint.sh` in VS Code, change CRLF → LF (bottom-right), save, rebuild. |
 | `error: unknown option '--foreground'` | Old Dockerfile using wrong command | Update Dockerfile — CMD should be `["clawdbot", "gateway", "run"]` (not `start --foreground`) |
 | `npm error: spawn git ENOENT` | Git not installed in image | Add `git` to `apt-get install` line in Dockerfile |
 | Container keeps restarting | Check `docker logs clawdbot` for the specific error | See errors above |

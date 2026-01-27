@@ -1,4 +1,6 @@
 .env
+.env.local
 *.log
 node_modules/
 .clawdbot/
+config/clawdbot.json

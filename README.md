@@ -1,6 +1,14 @@
+<p align="center">
+  <img src="assets/clawdbot-banner.jpg" alt="Clawdbot - AI Assistant" width="100%">
+</p>
+
 # 🦞 Docker Clawdbot
 
 Docker setup for [Clawdbot](https://docs.clawd.bot) — AI personal assistant with security hardening out of the box.
+
+<p align="center">
+  <img src="assets/clawdbot-robot.jpg" alt="Clawdbot Robot" width="300">
+</p>
 
 ## Features
 

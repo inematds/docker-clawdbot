@@ -35,12 +35,20 @@ nano .env  # Fill in your API keys
 ```
 
 **Required:**
-- `ANTHROPIC_API_KEY` — get from [Anthropic Console](https://console.anthropic.com/)
 - `GATEWAY_AUTH_TOKEN` — generate with `openssl rand -hex 24`
+- **One LLM provider** (choose one or more):
+
+| Provider | Env Variable | Get Key |
+|----------|-------------|---------|
+| Anthropic (Claude) | `ANTHROPIC_API_KEY` | [console.anthropic.com](https://console.anthropic.com/) |
+| OpenAI (GPT) | `OPENAI_API_KEY` | [platform.openai.com](https://platform.openai.com/api-keys) |
+| OpenRouter (multi-model) | `OPENROUTER_API_KEY` | [openrouter.ai](https://openrouter.ai/) |
+| Google (Gemini) | `GOOGLE_API_KEY` | [ai.google.dev](https://ai.google.dev/) |
+
+> 💡 **Tip:** OpenRouter gives access to multiple models (Claude, GPT, Llama, Gemini) with a single API key — including free models.
 
 **Optional:**
 - `TELEGRAM_BOT_TOKEN` — get from [@BotFather](https://t.me/BotFather)
-- `OPENAI_API_KEY` — for Codex CLI / image generation
 - `BRAVE_API_KEY` — for web search
 
 ### 3. Build and run

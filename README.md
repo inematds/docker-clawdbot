@@ -152,6 +152,89 @@ You can enable **multiple channels simultaneously**. All channels share the same
 
 ⚠️ **Cross-channel messaging is restricted** by design — the bot won't leak data between channels.
 
+## Webchat Access (Remote)
+
+The gateway binds to `127.0.0.1` (loopback). To access the Webchat from another machine, use an **SSH tunnel**:
+
+```bash
+# On your local machine (PC/Mac):
+ssh -L 18789:localhost:18789 root@your-server-ip
+```
+
+Then open in your browser:
+```
+http://127.0.0.1:18789/chat
+```
+
+This is the safest way to access the web interface remotely — no ports exposed, encrypted via SSH.
+
+## WhatsApp: Personal Number Tips
+
+If you use your **personal WhatsApp number** (self-chat mode), be aware:
+
+- ⚠️ By default, anyone who messages you may receive a pairing code response from the bot
+- ✅ **Fix:** Set `dmPolicy: allowlist` with only your number to prevent this:
+```json
+{
+  "channels": {
+    "whatsapp": {
+      "selfChatMode": true,
+      "dmPolicy": "allowlist",
+      "allowFrom": ["+5511999999999"]
+    }
+  }
+}
+```
+- 🔄 **Recommended:** Switch to a **dedicated number** as soon as possible for a cleaner setup
+
+## Recommended Tools & Skills
+
+Enhance your Clawdbot with these additional tools:
+
+### 🛠 CLI Tools
+
+| Tool | Install | Purpose |
+|------|---------|---------|
+| [Codex CLI](https://github.com/openai/codex) | `npm i -g @openai/codex` | AI coding agent (OpenAI) |
+| [agent-browser](https://github.com/vercel-labs/agent-browser) | `npm i -g agent-browser` | Headless browser automation for AI agents |
+| FFmpeg | `apt install ffmpeg` | Audio/video processing |
+| Faster Whisper | `pip install faster-whisper` | Local audio transcription |
+
+### 🎨 API Services
+
+| Service | Purpose | Pricing |
+|---------|---------|---------|
+| [OpenRouter](https://openrouter.ai) | Gateway to multiple LLMs (free models available) | Free tier + pay-per-use |
+| [Kie.ai](https://kie.ai) | Image, video & music generation (Veo 3.1, Flux, Suno) | Credits |
+| [ElevenLabs](https://elevenlabs.io) | Text-to-speech (realistic voices) | Free tier + paid |
+| [Gamma](https://gamma.app) | AI presentations & documents | Free tier + paid |
+| [HeyGen](https://heygen.com) | AI video avatars | Credits |
+
+### 📚 Skills (for Codex / Claude Code)
+
+| Skill | Install | Purpose |
+|-------|---------|---------|
+| [Remotion Skills](https://github.com/inematds/remotion-skills) | Copy to `.codex/skills/` | Create videos programmatically with React |
+
+```bash
+# Install Remotion Skills for Codex
+git clone https://github.com/inematds/remotion-skills.git /tmp/remotion-skills
+mkdir -p .codex/skills
+cp -r /tmp/remotion-skills/skills/remotion .codex/skills/
+```
+
+### 🤖 LLM Organization
+
+Recommended model strategy:
+
+| Model | Provider | Use Case | Cost |
+|-------|----------|----------|------|
+| Claude Opus 4.5 | Anthropic Max | Main assistant (conversations, tasks) | Monthly plan |
+| gpt-5.2-codex | OpenAI ChatGPT Team | Code generation (priority) | Monthly plan |
+| Free models | OpenRouter | Sub-agents, secondary tasks | Free |
+
+**Free models on OpenRouter:** DeepSeek R1, Llama 3.1 405B, Llama 3.3 70B, Gemini 2.0 Flash, Qwen3 Coder
+
 ## Requirements
 
 - Docker Engine 24+

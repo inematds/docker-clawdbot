@@ -1,3 +1,26 @@
+> # ⚠️🚨 THIS PROJECT HAS MOVED 🚨⚠️
+> 
+> ## Clawdbot has been renamed to **Moltbot**
+> 
+> **This repository is archived and no longer maintained.**
+> 
+> ### 👉 New repository: [docker-moltbot](https://github.com/inematds/docker-moltbot)
+> 
+> All future updates, bug fixes, and security patches will be in the new repo.
+> 
+> #### Migration:
+> ```bash
+> # Clone the new repo
+> git clone https://github.com/inematds/docker-moltbot.git
+> cd docker-moltbot
+> cp /path/to/old/.env .env
+> docker compose up -d
+> ```
+> 
+> **The `clawdbot` npm package still works as a compatibility shim, but will eventually be removed.**
+> 
+> ---
+
 <p align="center">
   <img src="assets/clawdbot-banner.jpg" alt="Clawdbot - AI Assistant" width="100%">
 </p>

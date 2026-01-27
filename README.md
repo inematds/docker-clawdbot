@@ -123,6 +123,28 @@ docker compose up -d
 docker compose logs -f
 ```
 
+### 5. Post-install setup
+
+After the container is running, configure your Clawdbot:
+
+```bash
+# Run the interactive setup wizard (API keys, channels, preferences)
+docker compose exec -it clawdbot clawdbot configure
+
+# Or just auto-fix detected issues (e.g. enable Telegram if token is set)
+docker compose exec -it clawdbot clawdbot doctor --fix
+
+# Check overall health
+docker compose exec clawdbot clawdbot status
+```
+
+| Command | What it does |
+|---------|-------------|
+| `clawdbot configure` | Interactive wizard — set up API keys, channels (Telegram, WhatsApp, etc.), model preferences |
+| `clawdbot doctor --fix` | Auto-detect and fix config issues (e.g. Telegram configured but not enabled) |
+| `clawdbot doctor` | Same check, but only **shows** issues without fixing |
+| `clawdbot status` | Show gateway status, connected channels, model info |
+
 ## Telegram Setup
 
 1. Create a bot with [@BotFather](https://t.me/BotFather)
@@ -330,6 +352,15 @@ Recommended model strategy:
 | `permission denied` | Not in docker group | Run `sudo usermod -aG docker $USER` then log out/in |
 | `port already in use` | Another service on 18789 | Change port in `docker-compose.yml` or stop the other service |
 | `no space left on device` | Disk full | Run `docker system prune -a` to clean old images |
+
+### Docker / Container
+
+| Error | Cause | Fix |
+|-------|-------|-----|
+| `exec entrypoint.sh: no such file or directory` | Windows CRLF line endings | Open `entrypoint.sh` in VS Code, change CRLF → LF (bottom-right corner), save. Rebuild with `docker compose up -d --build` |
+| `error: unknown option '--foreground'` | Old Dockerfile using wrong command | Update Dockerfile — CMD should be `["clawdbot", "gateway", "run"]` (not `start --foreground`) |
+| `npm error: spawn git ENOENT` | Git not installed in image | Add `git` to `apt-get install` line in Dockerfile |
+| Container keeps restarting | Check `docker logs clawdbot` for the specific error | See errors above |
 
 ### General
 

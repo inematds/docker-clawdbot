@@ -67,7 +67,30 @@ Copy-Item .env.example .env
 notepad .env
 ```
 
-> ⚠️ **Important:** You MUST create the `.env` file before running `docker compose up`. The build will fail without it.
+> ⚠️ **Important:** You MUST create AND edit the `.env` file before running `docker compose up`.
+
+Open the `.env` file and replace the placeholder values with your real keys:
+
+```env
+# ❌ WRONG (placeholder — won't work):
+ANTHROPIC_API_KEY=sk-ant-your-key-here
+
+# ✅ RIGHT (your real key):
+ANTHROPIC_API_KEY=sk-ant-abc123-your-actual-key
+```
+
+**Minimum to get started:** You need at least one LLM provider key (see table above) and a gateway token.
+
+To generate a secure gateway token:
+```bash
+# Linux / Mac:
+openssl rand -hex 24
+
+# Windows (PowerShell):
+-join ((1..48) | ForEach-Object { '{0:x}' -f (Get-Random -Max 16) })
+
+# Or just use any long random string (at least 24 characters)
+```
 
 **Required:**
 - `GATEWAY_AUTH_TOKEN` — generate with `openssl rand -hex 24`

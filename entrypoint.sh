@@ -38,6 +38,17 @@ if [ -n "$TELEGRAM_BOT_TOKEN" ]; then
   "
 fi
 
+# Docker requires binding to 0.0.0.0 inside the container for port mapping to work
+# The docker-compose.yml restricts external access to 127.0.0.1
+echo "🌐 Setting gateway bind to lan (required for Docker port mapping)..."
+node -e "
+  const fs = require('fs');
+  const cfg = JSON.parse(fs.readFileSync('$CONFIG_FILE', 'utf8'));
+  cfg.gateway = cfg.gateway || {};
+  cfg.gateway.bind = 'lan';
+  fs.writeFileSync('$CONFIG_FILE', JSON.stringify(cfg, null, 2));
+"
+
 # Set proper permissions
 chmod 600 "$CONFIG_FILE" 2>/dev/null || true
 

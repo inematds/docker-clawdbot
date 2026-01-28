@@ -1,6 +1,11 @@
 {
   "auth": {
-    "profiles": {}
+    "profiles": {
+      "anthropic:default": {
+        "provider": "anthropic",
+        "mode": "token"
+      }
+    }
   },
   "agents": {
     "defaults": {

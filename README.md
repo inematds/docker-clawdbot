@@ -146,12 +146,23 @@ docker compose up -d
 
 > ⚠️ **Windows error "pipe/dockerDesktopLinuxEngine"?** Docker Desktop is not running. Open it from the Start menu and wait until it shows "Docker is running", then retry.
 
-### 4. Check status
+### 4. Access the Webchat
+
+Open in your browser:
+```
+http://localhost:18789/chat
+```
+
+When prompted, enter your `GATEWAY_AUTH_TOKEN` from the `.env` file to authenticate.
+
+> 💡 **Tip:** You can also access directly with: `http://localhost:18789/?token=YOUR_TOKEN`
+
+### 5. Check status
 ```bash
 docker compose logs -f
 ```
 
-### 5. Post-install setup
+### 6. Post-install setup
 
 After the container is running, configure your Clawdbot:
 

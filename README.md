@@ -1,8 +1,18 @@
 <p align="center">
-  <img src="assets/clawdbot-banner.jpg" alt="Clawdbot - AI Assistant" width="100%">
+  <img src="assets/migration-banner.jpg" alt="ClawdBot → MoltBot Migration" width="100%">
 </p>
 
-> **ℹ️ Nota:** Clawdbot está sendo renomeado para **Moltbot**. A nova versão ainda está em desenvolvimento e não está estável. Por enquanto, continue usando este repositório normalmente.
+> # ⚠️ Clawdbot está sendo renomeado para **Moltbot**
+> 
+> Estamos trabalhando em uma versão atualizada. Quando estiver estável, o novo repositório será disponibilizado para migração.
+> 
+> **Enquanto isso, continue usando este repositório (docker-clawdbot) normalmente.**
+
+---
+
+<p align="center">
+  <img src="assets/clawdbot-banner.jpg" alt="Clawdbot - AI Assistant" width="100%">
+</p>
 
 # 🦞 Docker Clawdbot
 

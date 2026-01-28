@@ -2,17 +2,17 @@
   <img src="assets/migration-banner.jpg" alt="ClawdBot → MoltBot Migration" width="100%">
 </p>
 
-> # ⚠️🚨 THIS PROJECT HAS MOVED 🚨⚠️
+> # ⚠️🚨 ESTE PROJETO FOI MOVIDO 🚨⚠️
 > 
-> ## Clawdbot has been renamed to **Moltbot**
+> ## Clawdbot foi renomeado para **Moltbot**
 > 
-> **This repository is archived and no longer maintained.**
+> **Este repositório está arquivado e não é mais mantido.**
 > 
-> ### 👉 New repository: [docker-moltbot](https://github.com/inematds/docker-moltbot)
+> ### 👉 Novo repositório: [docker-moltbot](https://github.com/inematds/docker-moltbot)
 > 
-> All future updates, bug fixes, and security patches will be in the new repo.
+> Todas as futuras atualizações, correções de bugs e patches de segurança estarão no novo repo.
 > 
-> #### Migration:
+> #### Migração:
 > ```bash
 > # Clone the new repo
 > git clone https://github.com/inematds/docker-moltbot.git
@@ -21,7 +21,7 @@
 > docker compose up -d
 > ```
 > 
-> **The `clawdbot` npm package still works as a compatibility shim, but will eventually be removed.**
+> **O pacote npm `clawdbot` ainda funciona como shim de compatibilidade, mas será removido eventualmente.**
 > 
 > ---
 
@@ -31,37 +31,37 @@
 
 # 🦞 Docker Clawdbot
 
-Docker setup for [Clawdbot](https://docs.clawd.bot) — AI personal assistant with security hardening out of the box.
+Setup Docker para [Clawdbot](https://docs.clawd.bot) — assistente pessoal de IA com hardening de segurança pronto pra usar.
 
 <p align="center">
   <img src="assets/clawdbot-robot.jpg" alt="Clawdbot Robot" width="300">
 </p>
 
-## Features
+## Funcionalidades
 
-- 🔒 **Security hardened** — follows the [Top 10 Security Checklist](SECURITY.md)
-- 🐳 **One command setup** — `docker compose up -d`
-- 🔐 **Secrets via env vars** — no plaintext credentials
-- 👤 **Non-root container** — runs as unprivileged user
-- 📝 **Logging enabled** — audit trail by default
-- 📱 **Telegram ready** — just add your bot token
-- 🎙️ **Audio transcription** — Faster Whisper included (optional)
-- 🪟 **Windows compatible** — `.gitattributes` enforces LF endings, Dockerfile fixes CRLF
+- 🔒 **Segurança reforçada** — segue o [Top 10 Security Checklist](SECURITY.md)
+- 🐳 **Setup com um comando** — `docker compose up -d`
+- 🔐 **Secrets via variáveis de ambiente** — sem credenciais em texto puro
+- 👤 **Container não-root** — roda como usuário sem privilégios
+- 📝 **Logging habilitado** — trilha de auditoria por padrão
+- 📱 **Pronto pra Telegram** — só adicionar o token do bot
+- 🎙️ **Transcrição de áudio** — Faster Whisper incluso (opcional)
+- 🪟 **Compatível com Windows** — `.gitattributes` força finais LF, Dockerfile corrige CRLF
 
-## Quick Start
+## Início Rápido
 
-### Prerequisites
+### Pré-requisitos
 
-| Platform | Requirement | Install |
-|----------|------------|---------|
+| Plataforma | Requisito | Instalação |
+|------------|-----------|------------|
 | **Windows** | Docker Desktop | [docker.com/products/docker-desktop](https://www.docker.com/products/docker-desktop/) |
 | **Windows** | Git | [git-scm.com](https://git-scm.com/download/win) |
 | **Mac** | Docker Desktop | [docker.com/products/docker-desktop](https://www.docker.com/products/docker-desktop/) |
 | **Linux** | Docker Engine + Compose | `curl -fsSL https://get.docker.com \| sh` |
 
-> ⚠️ **Windows users:** Make sure **Docker Desktop is running** before proceeding. Check the system tray for the Docker icon. If WSL shows `docker-desktop Stopped`, open Docker Desktop and wait for it to start.
+> ⚠️ **Usuários Windows:** Certifique-se de que o **Docker Desktop está rodando** antes de continuar. Verifique o ícone do Docker na bandeja do sistema. Se o WSL mostrar `docker-desktop Stopped`, abra o Docker Desktop e aguarde ele iniciar.
 
-### 1. Clone the repo
+### 1. Clone o repo
 
 **Linux / Mac:**
 ```bash
@@ -69,13 +69,13 @@ git clone https://github.com/inematds/docker-clawdbot.git
 cd docker-clawdbot
 ```
 
-**Windows (CMD or PowerShell):**
+**Windows (CMD ou PowerShell):**
 ```cmd
 git clone https://github.com/inematds/docker-clawdbot.git
 cd docker-clawdbot
 ```
 
-### 2. Configure environment
+### 2. Configure o ambiente
 
 **Linux / Mac:**
 ```bash
@@ -95,21 +95,21 @@ Copy-Item .env.example .env
 notepad .env
 ```
 
-> ⚠️ **Important:** You MUST create AND edit the `.env` file before running `docker compose up`.
+> ⚠️ **Importante:** Você DEVE criar E editar o arquivo `.env` antes de rodar `docker compose up`.
 
-Open the `.env` file and replace the placeholder values with your real keys:
+Abra o arquivo `.env` e substitua os valores placeholder pelas suas chaves reais:
 
 ```env
-# ❌ WRONG (placeholder — won't work):
+# ❌ ERRADO (placeholder — não vai funcionar):
 ANTHROPIC_API_KEY=sk-ant-your-key-here
 
-# ✅ RIGHT (your real key):
+# ✅ CERTO (sua chave real):
 ANTHROPIC_API_KEY=sk-ant-abc123-your-actual-key
 ```
 
-**Minimum to get started:** You need at least one LLM provider key (see table above) and a gateway token.
+**Mínimo pra começar:** Você precisa de pelo menos uma chave de provedor LLM (veja a tabela acima) e um token de gateway.
 
-To generate a secure gateway token:
+Pra gerar um token de gateway seguro:
 ```bash
 # Linux / Mac:
 openssl rand -hex 24
@@ -120,51 +120,51 @@ openssl rand -hex 24
 # Or just use any long random string (at least 24 characters)
 ```
 
-**Required:**
-- `GATEWAY_AUTH_TOKEN` — generate with `openssl rand -hex 24`
-- **One LLM provider** (choose one or more):
+**Obrigatórios:**
+- `GATEWAY_AUTH_TOKEN` — gere com `openssl rand -hex 24`
+- **Um provedor LLM** (escolha um ou mais):
 
-| Provider | Env Variable | Get Key |
-|----------|-------------|---------|
+| Provedor | Variável de Ambiente | Obter Chave |
+|----------|---------------------|-------------|
 | Anthropic (Claude) | `ANTHROPIC_API_KEY` | [console.anthropic.com](https://console.anthropic.com/) |
 | OpenAI (GPT) | `OPENAI_API_KEY` | [platform.openai.com](https://platform.openai.com/api-keys) |
-| OpenRouter (multi-model) | `OPENROUTER_API_KEY` | [openrouter.ai](https://openrouter.ai/) |
+| OpenRouter (multi-modelo) | `OPENROUTER_API_KEY` | [openrouter.ai](https://openrouter.ai/) |
 | Google (Gemini) | `GOOGLE_API_KEY` | [ai.google.dev](https://ai.google.dev/) |
 
-> 💡 **Tip:** OpenRouter gives access to multiple models (Claude, GPT, Llama, Gemini) with a single API key — including free models.
+> 💡 **Dica:** O OpenRouter dá acesso a múltiplos modelos (Claude, GPT, Llama, Gemini) com uma única API key — incluindo modelos gratuitos.
 
-**Optional:**
-- `TELEGRAM_BOT_TOKEN` — get from [@BotFather](https://t.me/BotFather)
-- `BRAVE_API_KEY` — for web search
+**Opcionais:**
+- `TELEGRAM_BOT_TOKEN` — pegue com o [@BotFather](https://t.me/BotFather)
+- `BRAVE_API_KEY` — para busca na web
 
-### 3. Build and run
+### 3. Build e execução
 ```bash
 docker compose up -d
 ```
 
-> 💡 **First run** takes a few minutes to build the image (downloads Node.js, FFmpeg, etc). Subsequent runs are instant.
+> 💡 **Primeira execução** leva alguns minutos pra fazer o build da imagem (baixa Node.js, FFmpeg, etc). As execuções seguintes são instantâneas.
 
-> ⚠️ **Windows error "pipe/dockerDesktopLinuxEngine"?** Docker Desktop is not running. Open it from the Start menu and wait until it shows "Docker is running", then retry.
+> ⚠️ **Erro no Windows "pipe/dockerDesktopLinuxEngine"?** O Docker Desktop não está rodando. Abra ele pelo menu Iniciar e aguarde até mostrar "Docker is running", depois tente novamente.
 
-### 4. Access the Webchat
+### 4. Acesse o Webchat
 
-Open in your browser:
+Abra no seu navegador:
 ```
 http://localhost:18789/chat
 ```
 
-When prompted, enter your `GATEWAY_AUTH_TOKEN` from the `.env` file to authenticate.
+Quando solicitado, insira seu `GATEWAY_AUTH_TOKEN` do arquivo `.env` para autenticar.
 
-> 💡 **Tip:** You can also access directly with: `http://localhost:18789/?token=YOUR_TOKEN`
+> 💡 **Dica:** Você também pode acessar diretamente com: `http://localhost:18789/?token=SEU_TOKEN`
 
-### 5. Check status
+### 5. Verifique o status
 ```bash
 docker compose logs -f
 ```
 
-### 6. Post-install setup
+### 6. Configuração pós-instalação
 
-After the container is running, configure your Clawdbot:
+Depois que o container estiver rodando, configure seu Clawdbot:
 
 ```bash
 # Run the interactive setup wizard (API keys, channels, preferences)
@@ -177,47 +177,47 @@ docker compose exec -it clawdbot clawdbot doctor --fix
 docker compose exec clawdbot clawdbot status
 ```
 
-| Command | What it does |
-|---------|-------------|
-| `clawdbot configure` | Interactive wizard — set up API keys, channels (Telegram, WhatsApp, etc.), model preferences |
-| `clawdbot doctor --fix` | Auto-detect and fix config issues (e.g. Telegram configured but not enabled) |
-| `clawdbot doctor` | Same check, but only **shows** issues without fixing |
-| `clawdbot status` | Show gateway status, connected channels, model info |
+| Comando | O que faz |
+|---------|-----------|
+| `clawdbot configure` | Wizard interativo — configura API keys, canais (Telegram, WhatsApp, etc.), preferências de modelo |
+| `clawdbot doctor --fix` | Auto-detecta e corrige problemas de config (ex: Telegram configurado mas não habilitado) |
+| `clawdbot doctor` | Mesma verificação, mas só **mostra** os problemas sem corrigir |
+| `clawdbot status` | Mostra status do gateway, canais conectados, info do modelo |
 
-## Telegram Setup
+## Configuração do Telegram
 
-1. Create a bot with [@BotFather](https://t.me/BotFather)
-2. Add the token to `.env`:
+1. Crie um bot com o [@BotFather](https://t.me/BotFather)
+2. Adicione o token no `.env`:
    ```
    TELEGRAM_BOT_TOKEN=123456:ABC-your-token
    ```
-3. Restart: `docker compose restart`
-4. Message your bot — it will give you a pairing code
-5. Approve inside the container:
+3. Reinicie: `docker compose restart`
+4. Mande uma mensagem pro seu bot — ele vai te dar um código de pareamento
+5. Aprove dentro do container:
    ```bash
    docker compose exec clawdbot clawdbot pairing approve telegram <code>
    ```
 
-## Security
+## Segurança
 
-This setup implements 7 out of 10 security hardening measures automatically. See [SECURITY.md](SECURITY.md) for the full checklist and manual steps.
+Este setup implementa 7 de 10 medidas de hardening de segurança automaticamente. Veja [SECURITY.md](SECURITY.md) para o checklist completo e passos manuais.
 
-### Key defaults:
-- Gateway binds to `127.0.0.1` only
-- DM policy requires pairing approval
-- Config files are `chmod 600`
-- Container runs as non-root
-- Logging and diagnostics enabled
+### Padrões principais:
+- Gateway faz bind apenas em `127.0.0.1`
+- Política de DM requer aprovação de pareamento
+- Arquivos de config têm `chmod 600`
+- Container roda como não-root
+- Logging e diagnósticos habilitados
 
 ## Volumes
 
-| Volume | Purpose |
-|--------|---------|
-| `clawdbot-data` | Config and session data |
-| `clawdbot-workspace` | Agent workspace (AGENTS.md, memory, etc) |
-| `clawdbot-logs` | Log files (`/home/clawdbot/logs`) |
+| Volume | Finalidade |
+|--------|------------|
+| `clawdbot-data` | Dados de config e sessão |
+| `clawdbot-workspace` | Workspace do agente (AGENTS.md, memória, etc) |
+| `clawdbot-logs` | Arquivos de log (`/home/clawdbot/logs`) |
 
-## Useful Commands
+## Comandos Úteis
 
 ```bash
 # View logs
@@ -237,9 +237,9 @@ docker compose up -d
 docker compose exec clawdbot clawdbot status
 ```
 
-## Network Isolation
+## Isolamento de Rede
 
-By default, the container has internet access (needed for API calls). For full isolation:
+Por padrão, o container tem acesso à internet (necessário pras chamadas de API). Para isolamento total:
 
 ```yaml
 # In docker-compose.yml, change:
@@ -248,63 +248,63 @@ networks:
     internal: true  # No internet access
 ```
 
-⚠️ This blocks API calls to Anthropic/OpenAI. Only use if you have a local model setup.
+⚠️ Isso bloqueia chamadas de API pra Anthropic/OpenAI. Use apenas se você tiver um setup de modelo local.
 
-## Access Channels
+## Canais de Acesso
 
-Multiple ways to interact with your Clawdbot from anywhere:
+Múltiplas formas de interagir com seu Clawdbot de qualquer lugar:
 
-| Channel | Type | Access | Setup |
-|---------|------|--------|-------|
-| 📱 **Telegram** | Messaging | Anywhere (mobile/desktop) | Create bot via [@BotFather](https://t.me/BotFather) |
-| 📲 **WhatsApp** | Messaging | Anywhere (mobile/desktop) | Link via QR code (`clawdbot channels login`) |
-| 💬 **Webchat** | Web UI | Local network / VPN | Built-in, runs on gateway port |
-| 🌐 **Webchat (public)** | Web UI | Anywhere | Nginx reverse proxy + SSL certificate |
-| 🔒 **Tailscale** | VPN | Anywhere (zero-trust) | Install Tailscale on server + devices |
-| 💜 **Discord** | Messaging | Anywhere | Create bot via Discord Developer Portal |
-| 💼 **Slack** | Messaging | Anywhere | Create Slack app + bot token |
-| 🔵 **Signal** | Messaging | Anywhere | Signal CLI or linked device |
-| 🟢 **Matrix** | Messaging | Anywhere | Matrix homeserver + bot account |
+| Canal | Tipo | Acesso | Configuração |
+|-------|------|--------|--------------|
+| 📱 **Telegram** | Mensageiro | Qualquer lugar (mobile/desktop) | Crie um bot via [@BotFather](https://t.me/BotFather) |
+| 📲 **WhatsApp** | Mensageiro | Qualquer lugar (mobile/desktop) | Vincule via QR code (`clawdbot channels login`) |
+| 💬 **Webchat** | Interface Web | Rede local / VPN | Integrado, roda na porta do gateway |
+| 🌐 **Webchat (público)** | Interface Web | Qualquer lugar | Proxy reverso Nginx + certificado SSL |
+| 🔒 **Tailscale** | VPN | Qualquer lugar (zero-trust) | Instale Tailscale no servidor + dispositivos |
+| 💜 **Discord** | Mensageiro | Qualquer lugar | Crie um bot via Discord Developer Portal |
+| 💼 **Slack** | Mensageiro | Qualquer lugar | Crie um Slack app + bot token |
+| 🔵 **Signal** | Mensageiro | Qualquer lugar | Signal CLI ou dispositivo vinculado |
+| 🟢 **Matrix** | Mensageiro | Qualquer lugar | Homeserver Matrix + conta de bot |
 
-### Which should I use?
+### Qual devo usar?
 
-**Simplest setup:** Telegram — one bot token and you're done.
+**Setup mais simples:** Telegram — um bot token e pronto.
 
-**Most private:** Signal or Tailscale + Webchat.
+**Mais privado:** Signal ou Tailscale + Webchat.
 
-**Access from anywhere without extra apps:** Telegram + WhatsApp (you already have them on your phone).
+**Acesso de qualquer lugar sem apps extras:** Telegram + WhatsApp (você já tem eles no celular).
 
-**Best for teams/work:** Slack or Discord.
+**Melhor pra times/trabalho:** Slack ou Discord.
 
-**Most secure remote access to Webchat:** Tailscale — zero-trust VPN, no open ports, works from any network.
+**Acesso remoto mais seguro ao Webchat:** Tailscale — VPN zero-trust, sem portas abertas, funciona de qualquer rede.
 
-### Multi-channel
-You can enable **multiple channels simultaneously**. All channels share the same agent, memory, and workspace. Messages from any channel arrive in the same assistant.
+### Multi-canal
+Você pode habilitar **múltiplos canais simultaneamente**. Todos os canais compartilham o mesmo agente, memória e workspace. Mensagens de qualquer canal chegam no mesmo assistente.
 
-⚠️ **Cross-channel messaging is restricted** by design — the bot won't leak data between channels.
+⚠️ **Mensagens entre canais são restritas** por design — o bot não vaza dados entre canais.
 
-## Webchat Access (Remote)
+## Acesso ao Webchat (Remoto)
 
-The gateway binds to `127.0.0.1` (loopback). To access the Webchat from another machine, use an **SSH tunnel**:
+O gateway faz bind em `127.0.0.1` (loopback). Para acessar o Webchat de outra máquina, use um **túnel SSH**:
 
 ```bash
 # On your local machine (PC/Mac):
 ssh -L 18789:localhost:18789 root@your-server-ip
 ```
 
-Then open in your browser:
+Depois abra no seu navegador:
 ```
 http://127.0.0.1:18789/chat
 ```
 
-This is the safest way to access the web interface remotely — no ports exposed, encrypted via SSH.
+Essa é a forma mais segura de acessar a interface web remotamente — sem portas expostas, criptografado via SSH.
 
-## WhatsApp: Personal Number Tips
+## WhatsApp: Dicas para Número Pessoal
 
-If you use your **personal WhatsApp number** (self-chat mode), be aware:
+Se você usar seu **número pessoal do WhatsApp** (modo self-chat), fique atento:
 
-- ⚠️ By default, anyone who messages you may receive a pairing code response from the bot
-- ✅ **Fix:** Set `dmPolicy: allowlist` with only your number to prevent this:
+- ⚠️ Por padrão, qualquer pessoa que te mandar mensagem pode receber uma resposta de código de pareamento do bot
+- ✅ **Solução:** Defina `dmPolicy: allowlist` com apenas seu número pra evitar isso:
 ```json
 {
   "channels": {
@@ -316,36 +316,36 @@ If you use your **personal WhatsApp number** (self-chat mode), be aware:
   }
 }
 ```
-- 🔄 **Recommended:** Switch to a **dedicated number** as soon as possible for a cleaner setup
+- 🔄 **Recomendado:** Migre pra um **número dedicado** o mais rápido possível pra um setup mais limpo
 
-## Recommended Tools & Skills
+## Ferramentas e Skills Recomendadas
 
-Enhance your Clawdbot with these additional tools:
+Turbine seu Clawdbot com essas ferramentas adicionais:
 
-### 🛠 CLI Tools
+### 🛠 Ferramentas CLI
 
-| Tool | Install | Purpose |
-|------|---------|---------|
-| [Codex CLI](https://github.com/openai/codex) | `npm i -g @openai/codex` | AI coding agent (OpenAI) |
-| [agent-browser](https://github.com/vercel-labs/agent-browser) | `npm i -g agent-browser` | Headless browser automation for AI agents |
-| FFmpeg | `apt install ffmpeg` | Audio/video processing |
-| Faster Whisper | `pip install faster-whisper` | Local audio transcription |
+| Ferramenta | Instalação | Finalidade |
+|------------|------------|------------|
+| [Codex CLI](https://github.com/openai/codex) | `npm i -g @openai/codex` | Agente de código IA (OpenAI) |
+| [agent-browser](https://github.com/vercel-labs/agent-browser) | `npm i -g agent-browser` | Automação de navegador headless pra agentes IA |
+| FFmpeg | `apt install ffmpeg` | Processamento de áudio/vídeo |
+| Faster Whisper | `pip install faster-whisper` | Transcrição de áudio local |
 
-### 🎨 API Services
+### 🎨 Serviços de API
 
-| Service | Purpose | Pricing |
-|---------|---------|---------|
-| [OpenRouter](https://openrouter.ai) | Gateway to multiple LLMs (free models available) | Free tier + pay-per-use |
-| [Kie.ai](https://kie.ai) | Image, video & music generation (Veo 3.1, Flux, Suno) | Credits |
-| [ElevenLabs](https://elevenlabs.io) | Text-to-speech (realistic voices) | Free tier + paid |
-| [Gamma](https://gamma.app) | AI presentations & documents | Free tier + paid |
-| [HeyGen](https://heygen.com) | AI video avatars | Credits |
+| Serviço | Finalidade | Preço |
+|---------|------------|-------|
+| [OpenRouter](https://openrouter.ai) | Gateway pra múltiplos LLMs (modelos gratuitos disponíveis) | Tier gratuito + pay-per-use |
+| [Kie.ai](https://kie.ai) | Geração de imagem, vídeo e música (Veo 3.1, Flux, Suno) | Créditos |
+| [ElevenLabs](https://elevenlabs.io) | Text-to-speech (vozes realistas) | Tier gratuito + pago |
+| [Gamma](https://gamma.app) | Apresentações e documentos com IA | Tier gratuito + pago |
+| [HeyGen](https://heygen.com) | Avatares de vídeo com IA | Créditos |
 
-### 📚 Skills (for Codex / Claude Code)
+### 📚 Skills (para Codex / Claude Code)
 
-| Skill | Install | Purpose |
-|-------|---------|---------|
-| [Remotion Skills](https://github.com/inematds/remotion-skills) | Copy to `.codex/skills/` | Create videos programmatically with React |
+| Skill | Instalação | Finalidade |
+|-------|------------|------------|
+| [Remotion Skills](https://github.com/inematds/remotion-skills) | Copie para `.codex/skills/` | Crie vídeos programaticamente com React |
 
 ```bash
 # Install Remotion Skills for Codex
@@ -354,65 +354,65 @@ mkdir -p .codex/skills
 cp -r /tmp/remotion-skills/skills/remotion .codex/skills/
 ```
 
-### 🤖 LLM Organization
+### 🤖 Organização de LLMs
 
-Recommended model strategy:
+Estratégia recomendada de modelos:
 
-| Model | Provider | Use Case | Cost |
-|-------|----------|----------|------|
-| Claude Opus 4.5 | Anthropic Max | Main assistant (conversations, tasks) | Monthly plan |
-| gpt-5.2-codex | OpenAI ChatGPT Team | Code generation (priority) | Monthly plan |
-| Free models | OpenRouter | Sub-agents, secondary tasks | Free |
+| Modelo | Provedor | Caso de Uso | Custo |
+|--------|----------|-------------|-------|
+| Claude Opus 4.5 | Anthropic Max | Assistente principal (conversas, tarefas) | Plano mensal |
+| gpt-5.2-codex | OpenAI ChatGPT Team | Geração de código (prioridade) | Plano mensal |
+| Modelos gratuitos | OpenRouter | Sub-agentes, tarefas secundárias | Gratuito |
 
-**Free models on OpenRouter:** DeepSeek R1, Llama 3.1 405B, Llama 3.3 70B, Gemini 2.0 Flash, Qwen3 Coder
+**Modelos gratuitos no OpenRouter:** DeepSeek R1, Llama 3.1 405B, Llama 3.3 70B, Gemini 2.0 Flash, Qwen3 Coder
 
-## Requirements
+## Requisitos
 
 - Docker Engine 24+
 - Docker Compose v2+
-- At least 2GB RAM (4GB recommended with Whisper)
+- Pelo menos 2GB de RAM (4GB recomendado com Whisper)
 
-## Troubleshooting
+## Solução de Problemas
 
 ### Windows
 
-| Error | Cause | Fix |
-|-------|-------|-----|
-| `open //./pipe/dockerDesktopLinuxEngine: O sistema não pode encontrar o arquivo` | Docker Desktop not running | Open Docker Desktop and wait for it to start |
-| `.env not found` | Missing config file | Run `copy .env.example .env` and edit with `notepad .env` |
-| `the attribute version is obsolete` | Old docker-compose format | Ignore (harmless) or update to latest docker-clawdbot |
-| `WSL docker-desktop Stopped` | WSL not started | Open Docker Desktop — it starts WSL automatically |
-| Build hangs or fails | Not enough RAM | Ensure at least 4GB allocated to Docker (Settings → Resources) |
+| Erro | Causa | Solução |
+|------|-------|---------|
+| `open //./pipe/dockerDesktopLinuxEngine: O sistema não pode encontrar o arquivo` | Docker Desktop não está rodando | Abra o Docker Desktop e aguarde ele iniciar |
+| `.env not found` | Arquivo de config faltando | Execute `copy .env.example .env` e edite com `notepad .env` |
+| `the attribute version is obsolete` | Formato antigo do docker-compose | Ignore (inofensivo) ou atualize pra versão mais recente do docker-clawdbot |
+| `WSL docker-desktop Stopped` | WSL não iniciou | Abra o Docker Desktop — ele inicia o WSL automaticamente |
+| Build trava ou falha | RAM insuficiente | Garanta pelo menos 4GB alocados pro Docker (Settings → Resources) |
 
 ### Linux / Mac
 
-| Error | Cause | Fix |
-|-------|-------|-----|
-| `permission denied` | Not in docker group | Run `sudo usermod -aG docker $USER` then log out/in |
-| `port already in use` | Another service on 18789 | Change port in `docker-compose.yml` or stop the other service |
-| `no space left on device` | Disk full | Run `docker system prune -a` to clean old images |
+| Erro | Causa | Solução |
+|------|-------|---------|
+| `permission denied` | Não está no grupo docker | Execute `sudo usermod -aG docker $USER` e depois faça logout/login |
+| `port already in use` | Outro serviço na porta 18789 | Mude a porta no `docker-compose.yml` ou pare o outro serviço |
+| `no space left on device` | Disco cheio | Execute `docker system prune -a` pra limpar imagens antigas |
 
 ### Docker / Container
 
-| Error | Cause | Fix |
-|-------|-------|-----|
-| `exec entrypoint.sh: no such file or directory` | Windows CRLF line endings | This is auto-fixed by `.gitattributes` and the Dockerfile. If it still happens: `git config core.autocrlf input` then re-clone. Or open `entrypoint.sh` in VS Code, change CRLF → LF (bottom-right), save, rebuild. |
-| `error: unknown option '--foreground'` | Old Dockerfile using wrong command | Update Dockerfile — CMD should be `["clawdbot", "gateway", "run"]` (not `start --foreground`) |
-| `npm error: spawn git ENOENT` | Git not installed in image | Add `git` to `apt-get install` line in Dockerfile |
-| Container keeps restarting | Check `docker logs clawdbot` for the specific error | See errors above |
+| Erro | Causa | Solução |
+|------|-------|---------|
+| `exec entrypoint.sh: no such file or directory` | Finais de linha CRLF do Windows | Isso é corrigido automaticamente pelo `.gitattributes` e o Dockerfile. Se ainda acontecer: `git config core.autocrlf input` e clone novamente. Ou abra `entrypoint.sh` no VS Code, mude CRLF → LF (canto inferior direito), salve, rebuild. |
+| `error: unknown option '--foreground'` | Dockerfile antigo usando comando errado | Atualize o Dockerfile — CMD deve ser `["clawdbot", "gateway", "run"]` (não `start --foreground`) |
+| `npm error: spawn git ENOENT` | Git não instalado na imagem | Adicione `git` na linha `apt-get install` do Dockerfile |
+| Container reiniciando em loop | Verifique `docker logs clawdbot` pro erro específico | Veja os erros acima |
 
-### General
+### Geral
 
-| Error | Fix |
-|-------|-----|
-| Bot not responding | Check logs: `docker compose logs -f` |
-| API errors | Verify API keys in `.env` are correct |
-| Can't access Webchat | Use SSH tunnel: `ssh -L 18789:localhost:18789 user@server` |
+| Erro | Solução |
+|------|---------|
+| Bot não responde | Verifique os logs: `docker compose logs -f` |
+| Erros de API | Verifique se as API keys no `.env` estão corretas |
+| Não consegue acessar o Webchat | Use túnel SSH: `ssh -L 18789:localhost:18789 user@server` |
 
-## Contributing
+## Contribuindo
 
-PRs welcome! Please follow the security checklist in [SECURITY.md](SECURITY.md).
+PRs são bem-vindas! Por favor siga o checklist de segurança em [SECURITY.md](SECURITY.md).
 
-## License
+## Licença
 
 MIT

@@ -2,6 +2,8 @@
   <img src="assets/clawdbot-banner.jpg" alt="Clawdbot - AI Assistant" width="100%">
 </p>
 
+> **ℹ️ Nota:** Clawdbot está sendo renomeado para **Moltbot**. A nova versão ainda está em desenvolvimento e não está estável. Por enquanto, continue usando este repositório normalmente.
+
 # 🦞 Docker Clawdbot
 
 Setup Docker para [Clawdbot](https://docs.clawd.bot) — assistente pessoal de IA com hardening de segurança pronto pra usar.
